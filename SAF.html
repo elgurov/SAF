@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SAF · Помощник менеджера Pro</title>
+<style>
+:root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#121212;--gl:rgba(255,255,255,.06);--bd:rgba(255,255,255,.1);--tx:#ececec;--mu:#9a9a9a;--em:#10B981;--emd:rgba(16,185,129,.15);--wr:#f59e0b;--rd:#ef4444;--wa:#25D366;--wad:rgba(37,211,102,.15)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 -apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:140px;background-image:radial-gradient(600px 300px at 80% -50px,rgba(16,185,129,.12),transparent)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(18,18,18,.85);backdrop-filter:blur(16px);padding:10px 12px 8px;border-bottom:1px solid var(--bd)}
+#q{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--bd);background:var(--gl);color:var(--tx);font-size:16px;outline:none}
+#q:focus{border-color:var(--em)}
+main{padding:12px}
+.cpm{display:none}.ln{display:flex;gap:10px;align-items:flex-start;cursor:pointer}.ln .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--emd);color:var(--em);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}.ln .bolt{opacity:.55;font-size:14px}.card,.rk{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,select{-webkit-user-select:text;user-select:text}.card.flash{border-color:var(--em);background:var(--emd)}
+.card{background:var(--gl);border:1px solid var(--bd);border-radius:16px;padding:12px;margin:0 0 10px;backdrop-filter:blur(10px)}
+h2{font-size:19px;margin:4px 0 10px}h3{font-size:15px;margin:0 0 6px;color:var(--em)}
+.mu{color:var(--mu);font-size:13px}
+.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}
+input,select{width:100%;padding:11px;border-radius:12px;border:1px solid var(--bd);background:#1c1c1c;color:var(--tx);font-size:16px}
+label{font-size:12px;color:var(--mu)}
+button{font:inherit;cursor:pointer}
+.btn{border:0;border-radius:12px;padding:12px;background:var(--em);color:#04210f;font-weight:700;width:100%}
+.cp{border:1px solid var(--bd);background:transparent;color:var(--em);border-radius:10px;padding:5px 10px;font-size:12px;margin-top:6px}
+.btn-wa{border:1px solid rgba(37,211,102,.4);background:var(--wad);color:var(--wa);border-radius:10px;padding:5px 10px;font-size:12px;margin-top:6px;margin-left:6px;font-weight:600}
+.seg{display:flex;background:#1c1c1c;border-radius:12px;padding:3px;margin-bottom:10px}
+.seg button{flex:1;border:0;background:transparent;color:var(--mu);padding:9px 4px;border-radius:10px;font-size:13px}
+.seg button.on{background:var(--em);color:#04210f;font-weight:700}
+.chips{display:flex;gap:6px;overflow-x:auto;margin-bottom:10px;padding-bottom:4px}
+.chips button{white-space:nowrap;border:1px solid var(--bd);background:var(--gl);color:var(--tx);border-radius:20px;padding:7px 12px;font-size:13px}
+.chips button.on{border-color:var(--em);background:var(--emd);color:var(--em)}
+.chk{display:flex;gap:10px;align-items:flex-start}
+.chk input{width:22px;height:22px;accent-color:var(--em);flex:none;margin-top:2px}
+.chk.done .t{opacity:.5;text-decoration:line-through}
+.big{font-size:34px;font-weight:800;color:var(--em)}
+.tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:8px;background:var(--emd);color:var(--em)}
+.warn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.35);color:#fbbf24;border-radius:12px;padding:8px 10px;font-size:13px;margin-top:8px}
+nav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;background:rgba(18,18,18,.92);backdrop-filter:blur(16px);border-top:1px solid var(--bd);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;border:0;background:transparent;color:var(--mu);font-size:10.5px;padding:4px 0;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button span{font-size:20px}nav button.on{color:var(--em)}
+#wolf{position:fixed;right:12px;bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:40;border:0;border-radius:26px;padding:12px 16px;background:linear-gradient(135deg,#10B981,#047857);color:#fff;font-weight:700;box-shadow:0 6px 20px rgba(16,185,129,.4)}
+#ov{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.7);display:none;align-items:flex-end}
+#ov.show{display:flex}
+#sheet{background:#181818;border-radius:22px 22px 0 0;max-height:88%;overflow:auto;width:100%;padding:14px 14px 28px;border-top:1px solid var(--bd)}
+#toast{position:fixed;left:50%;top:calc(70px + env(safe-area-inset-top,0px));transform:translate(-50%,-20px);background:var(--em);color:#04210f;font-weight:700;padding:9px 16px;border-radius:20px;opacity:0;transition:.25s;z-index:99;pointer-events:none}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.stk{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom,0px));z-index:25;padding:10px 12px;display:flex;gap:8px;background:linear-gradient(rgba(18,18,18,0),rgba(18,18,18,.96) 35%)}.stk .btn{flex:1}body.t1 #wolf{bottom:calc(136px + env(safe-area-inset-bottom,0px))}body.t1{padding-bottom:200px}
+.pane{display:none}.pane.on{display:block}
+table{width:100%;border-collapse:collapse}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<header><input id="q" type="search" placeholder="🔍 Поиск: дорого, муж, побочка, живот…" autocomplete="off"></header>
+<main>
+<div class="mu" style="text-align:center;margin:-2px 0 8px">👆 Удерживайте фразу — копировать. Тап ⚡ — отработка возражения</div><div id="res" style="display:none"></div>
+<div id="panes">
+<section class="pane on" id="p0"></section><section class="pane" id="p1"></section><section class="pane" id="p2"></section><section class="pane" id="p3"></section><section class="pane" id="p4"></section>
+</div>
+</main>
+<button id="wolf">🆘 Нет ответа?</button>
+<nav id="nav"></nav>
+<div id="ov"><div id="sheet"></div></div>
+<div id="toast">Скопировано в буфер!</div>
+<script>
+var S={risk:null,h:'',w:'',a:'',g:'f',tab:0,stage:0,scen:'A',mode:'s',chk:{},cof:1500,cat:0,temp:'warm',delayMonths:2};
+try{var sv=JSON.parse(localStorage.getItem('saf_s')||'null');if(sv)for(var k in sv)S[k]=sv[k]}catch(e){}
+function save(){try{localStorage.setItem('saf_s',JSON.stringify(S))}catch(e){}}
+var $=function(i){return document.getElementById(i)};
+var C=[];function cb(t){C.push(t);return '<i class="cpm" data-c="'+(C.length-1)+'"></i>'}
+function cp(i){var t=C[i];function ok(){var el=$('toast');el.classList.add('show');setTimeout(function(){el.classList.remove('show')},1400)}
+ try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}
+ function fb(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();ok()}}
+
+function sendWA(text){
+ var url='https://wa.me/?text='+encodeURIComponent(text);
+ window.open(url,'_blank');
+}
+
+var lp=null,lpy=0,sup=0;
+function lps(e){var c=e.target.closest&&e.target.closest('.card,.rk');if(!c)return;var m=c.querySelector('.cpm');if(!m)return;if(e.target.closest('button,select,input[type=number]'))return;
+ lpy=e.touches?e.touches[0].clientY:e.clientY;clearTimeout(lp);lp=setTimeout(function(){lp=null;sup=Date.now();c.classList.add('flash');setTimeout(function(){c.classList.remove('flash')},350);cp(+m.dataset.c);if(navigator.vibrate)navigator.vibrate(30)},450)}
+function lpe(){clearTimeout(lp);lp=null}
+function lpm(e){var y=e.touches?e.touches[0].clientY:e.clientY;if(Math.abs(y-lpy)>8)lpe()}
+['touchstart','mousedown'].forEach(function(n){document.addEventListener(n,lps,{passive:true})});
+['touchend','touchcancel','mouseup','scroll'].forEach(function(n){document.addEventListener(n,lpe,{passive:true})});
+['touchmove','mousemove'].forEach(function(n){document.addEventListener(n,lpm,{passive:true})});
+document.addEventListener('click',function(e){if(Date.now()-sup<700){e.preventDefault();e.stopPropagation()}},true);
+document.addEventListener('contextmenu',function(e){if(e.target.closest&&e.target.closest('.card'))e.preventDefault()});
+function ph(t){return '<div class="card" style="margin:6px 0"><div>'+t+'</div>'+cb(t.replace(/<[^>]+>/g,''))+'</div>'}
+
+var QS=[
+['👋 Знакомство',['С какого города обращаетесь?','Сколько вам лет, какой рост и вес?','Сколько кг хотите убрать и к какой дате?','Что пробовали раньше: питание, БАДы, травы, спорт? Что получилось, а что нет?']],
+['🩺 Здоровье',['Давление в норме? Щитовидную железу и гормоны проверяли?','Бывает повышенная потливость или храп?','Есть хронические заболевания, беременность или ГВ?','Принимаете ли что-то постоянно (лекарства, гормоны)?']],
+['🍰 Аппетит / Сладкое',['Тянет на сладкое именно вечером или в стресс?','Вы заедаете эмоции или едите «на автомате»?','Как быстро после еды снова хочется перекусить?','Бывали срывы после строгих диет?']],
+['😴 Сон / Энергия / Стресс',['Высыпаетесь ли вы? Как засыпаете?','Есть ли сейчас стресс, тревога или подавленность?','Бывает упадок сил после обеда? Чем бодритесь?','Нужные гормоны вырабатываются во сне, как вы думаете, хватает ли вам качественного сна?']],
+['👨‍👩‍👧 Семья / Роды',['Вы замужем, есть дети?','Сами рожали или было кесарево? Как менялся вес после?','Критические дни приходят стабильно?','Что скажут близкие, когда вы вернёте форму?']],
+['💞 Близость (деликатно, с разрешением)',['Можно задать вопрос более личный? Он нужен, чтобы понять гормональный фон и уровень стресса.','Как менялись желание и близость вместе с набором веса?','Бывает ли стеснение или дискомфорт в близости из-за фигуры?','Получаете ли вы удовольствие или усталость и напряжение мешают расслабиться? Ведь именно расслабление и хороший сон снижают стресс.']],
+['🌿 ЖКТ / Метаболизм',['Бывает тяжесть или вздутие после еды?','Как со стулом, регулярно ли?','Сколько воды пьёте за день?']]];
+var ST=[
+['🤝 Утепление',[['Здравствуйте, {имя}! Меня зовут ___, я эксперт по контролю веса компании SAF. Вы оставляли заявку на консультацию, всё верно?'],['Подскажите, как к вам можно обращаться?'],['Спасибо, что оставили заявку и проявили интерес к бренду. Постараюсь ответить на все вопросы, чтобы консультация была вам полезна. Удобно сейчас поговорить 10–15 минут?'],['Если неудобно, скажите когда: я наберу ровно в это время.'],['Сначала задам несколько вопросов о здоровье, чтобы понять, насколько продукт вам подойдёт, потом сориентирую по курсу и помогу оформить. Хорошо?'],['У меня много клиенток с такой же ситуацией, поэтому давайте говорить открыто. Я буду задавать открытые вопросы, хорошо?']]],
+['🔍 Диагностика',null],['🔀 Сценарий',null],
+['💎 Ценность',[['SAF — комплекс капсул для естественного контроля аппетита и снижения тяги к еде плюс саше Lite & Balance для обмена веществ, энергии и пищеварения. Компоненты отобраны из Южной Кореи и Германии, готовый продукт произведён в Казахстане.'],['Я назначу на ваше имя нутрициолога: он на связи 24/7, составит индивидуальный рацион и упражнения. Вы готовы преобразиться?'],['REC'],['GIFT']]],
+['✅ Закрытие',null]];
+var SC={A:['Давайте честно: лишние килограммы — это не только фигура. Они давят на сердце и суставы, забирают энергию, сон и нередко самооценку и желание близости.','Если ничего не менять, обычно вес растёт медленно, но уверенно: усталость копится, отёки остаются, а уверенности в себе становится меньше.','Хорошая новость: это решаемо. Для этого у нас комплекс и нутрициолог. Ваша цель — минус {X} кг; вместе с рационом мы идём к ней шаг за шагом.','Скажите, если вернуть лёгкость и уверенность в себе, что изменится в вашей жизни, в том числе в отношениях?'],
+B:['При нормальном весе тоже бывает «скрытый жир», отёчность, вялая кожа и нет энергии. Снаружи всё хорошо, а внутри усталость и стресс.','Если это не менять, обычно усталость копится, сон ухудшается, а желание и настроение падают. Организму нужна поддержка.','SAF — это детокс, тонус и энергия: саше с глутатионом и витамином C плюс спокойный контроль аппетита без качелей.','Что для вас важнее: энергия, красивая кожа или лёгкость в теле?']};
+var ROAD=['1-й месяц: многие отмечают, что становятся спокойнее, лучше спят, появляется лёгкость. Ориентир компании: минус 4–8 кг.','2-й месяц: подключается комплексный эффект, налаживаются обмен и пищеварение. Ориентир: суммарно минус 8–16 кг.','Около 5 месяцев: закрепление, энергия, тонус, антиоксидантная поддержка.','7–10 месяцев: стройность, упругость кожи и результат на долгий срок.','Всё индивидуально и зависит от питания и режима, нутрициолог ведёт вас по шагам.'];
+function pl(n){return n==1?'банка':n<5?'банки':'банок'}
+var CMP=[
+['Корглутид GLP-1','Это главный «контролёр аппетита». В организме есть гормон сытости GLP-1: после еды он сообщает мозгу «ты наелся». Компонент вдохновлён этим механизмом, поэтому сытость держится дольше и меньше тянет на перекусы. Потому и вечерние срывы случаются реже.','Заявлен производителем как компонент, вдохновлённый сигнализацией ГПП-1: глюкагоноподобный пептид-1 вырабатывается L-клетками кишечника, замедляет опорожнение желудка и действует на центры насыщения гипоталамуса. Точный состав и дозу уточняйте у производителя: это БАД, а не препарат. Работает в связке с инулином: его ферментация даёт короткоцепочечные жирные кислоты, которые тоже стимулируют секрецию ГПП-1 и PYY.','«Вы сказали, что перекусываете по вечерам: именно здесь компонент помогает дольше чувствовать сытость»','насыщение аппетит голод сладкое перекус','Corglutid GLP-1 — ГПП-1-ориентированный компонент'],
+['Шафран','Шафран работает на настроение. Когда нервничаем, рука тянется к сладкому: это «заедание эмоций». Шафран мягко поддерживает хорошее настроение, поэтому нет такой потребности заедать стресс. Меньше тревоги — меньше лишней еды.','Действующие вещества: кроцины, пикрокроцин и сафранал. В клинических исследованиях экстракт ассоциируется с улучшением настроения и снижением эмоционального переедания и перекусов, предположительно через серотонинергическую передачу. Дополняет L-теанин: шафран поддерживает настроение, теанин — спокойствие.','«Вы сказали, что заедаете стресс, шафран как раз про это»','стресс настроение сладкое эмоции','Crocus sativus L. — экстракт шафрана (кроцин, сафранал)'],
+['Джимнема','«Приглушитель сладкого»: вкус сладкого становится менее ярким, шоколад и конфеты уже не так притягивают. Потому отказаться от сладкого проще, без борьбы с собой.','Гимнемовые кислоты структурно схожи с глюкозой и конкурентно связываются с рецепторами сладкого на языке, снижая интенсивность вкуса; есть данные и о влиянии на всасывание глюкозы. Вместе с белой фасолью (крахмал) и ГПП-1-компонентом формирует контур контроля углеводной тяги.','«Вам сложно без сладкого? Здесь поможет джимнема»','сахар сладкое тяга шоколад','Gymnema sylvestre R.Br. — гимнемовые кислоты'],
+['L-теанин','Аминокислота из зелёного чая, «мягкий успокоитель» без сонливости: голова ясная, внутри спокойнее. А когда вы спокойны, вы не набрасываетесь на еду вечером. Заодно помогает лучше спать, а во сне организм регулирует голод.','Структурный аналог глутамата; проходит гематоэнцефалический барьер, повышает альфа-активность мозга, модулирует ГАМК и глутаматергическую передачу, снижает стресс-реакцию. Хороший сон и сниженный кортизол косвенно влияют на гормоны аппетита (грелин, лептин).','«Вы плохо спите и нервничаете: теанин поддержит спокойствие и сон»','стресс сон нервы тревога','L-theanine (N-этил-L-глутамин)'],
+['Белая фасоль','«Блокировщик части углеводов»: замедляет переваривание крахмала из хлеба, картошки, макарон. Потому скачки сахара мягче, а после еды меньше тянет на добавку. Но всё это работает вместе с питанием, нутрициолог поможет выстроить рацион.','Содержит ингибитор α-амилазы (фазеолин) — фермента, расщепляющего крахмал до глюкозы. Замедление гидролиза даёт более плавную гликемическую кривую. Эффект умеренный и зависит от дозы и доли крахмала в рационе.','«Любите хлеб и макароны? Фасоль подстрахует»','углеводы хлеб макароны крахмал','Phaseolus vulgaris L. — экстракт белой фасоли (фазеолин)'],
+['Афрамомум мелегета','Пряность из Западной Африки, «внутренний обогреватель». Поддерживает выработку тепла и расход энергии. Потому организму легче тратить энергию, а не копить её.','Содержит 6-параол, 6-гингерол и другие жгучие соединения; в небольших исследованиях связывают с активацией бурой жировой ткани и термогенезом. Данных у человека немного: позиционировать как поддержку метаболизма, а не «жиросжигатель».','«Для минус {X} кг нужен ещё и живой метаболизм, это про него»','жир метаболизм термогенез','Aframomum melegueta K.Schum. (гвинейский перец)'],
+['Таурин','Даёт клеткам тонус без кофеина и помогает держать водный баланс. Потому к обеду нет «упадка сил», и тяга к сладкому как к быстрому топливу меньше. Ещё нужен для работы печени и желчи.','Условно незаменимая аминокислота: осморегуляция клеток, конъюгация жёлчных кислот (участвует в переваривании жиров), антиоксидантные и нейромодулирующие (ГАМК/глицин) эффекты. В связке с L-тирозином поддерживает работоспособность.','«Если энергии нет к обеду, таурин за это отвечает»','энергия отеки бодрость','Taurine (2-аминоэтансульфоновая кислота)'],
+['L-тирозин','«Сырьё» для гормонов бодрости и концентрации. В стрессе мозг тратит их быстро, тирозин восполняет запас. Потому голова ясная и не нужно бодриться кофе.','Предшественник дофамина, норадреналина, адреналина и тиреоидных гормонов; в исследованиях поддерживает когнитивные функции при стрессе и недосыпе. Участвует в синтезе гормонов щитовидной железы, поэтому при её заболеваниях нужна консультация врача.','«Кофе не спасает? Вот альтернатива»','энергия бодрость концентрация щитовидка','L-tyrosine (4-гидроксифенилаланин)'],
+['CLA','Полезная жирная кислота, которая помогает организму «собирать» мышцы, а не жир. Потому фигура подтягивается, а не просто теряет вес. Лучше работает вместе с движением.','Изомеры линолевой кислоты (c9,t11 и t10,c12); в метаанализах показывают небольшое снижение жировой массы и умеренное влияние на состав тела через модуляцию липидного обмена. Эффект скромный, позиционировать как поддержку.','«Хотите подтянуть фигуру, а не только вес?»','жир фигура тонус мышцы','Conjugated Linoleic Acid (CLA)'],
+['Глутатион','«Главный антиоксидант» и внутренний фильтр. Помогает клеткам справляться с нагрузкой от стресса, экологии и питания. Потому кожа и самочувствие выглядят свежее, а усталость уходит. Это про очищение и омоложение.','Трипептид γ-глутамил-цистеинил-глицин (GSH) — ключевая внутриклеточная антиоксидантная система, участвует в биотрансформации ксенобиотиков в печени. Биодоступность перорального глутатиона обсуждается. Витамин C регенерирует окисленный глутатион (GSSG→GSH).','«Кожа, усталость, очищение — это про глутатион»','детокс кожа омоложение печень','Glutathione (γ-глутамил-цистеинил-глицин, GSH)'],
+['Витамин C','Витамин красоты и иммунитета: нужен для коллагена, а это упругая кожа. Заодно «перезаряжает» глутатион. Потому они работают как команда.','Кофактор пролил- и лизилгидроксилаз при синтезе коллагена; водорастворимый антиоксидант, регенерирует токоферол и глутатион, улучшает усвоение негемового железа.','«Для красоты и тонуса это база»','иммунитет кожа коллаген','Ascorbic acid (витамин C)'],
+['Инулин','«Еда для хороших бактерий» в кишечнике. Когда микрофлора в порядке, пищеварение комфортнее, живот спокойнее, а сытость сильнее. В первые дни у некоторых бывает лёгкое вздутие, это адаптация: пейте больше воды.','Пребиотический фруктан: не гидролизуется в тонкой кишке, ферментируется Bifidobacterium до короткоцепочечных жирных кислот (бутират, ацетат, пропионат), стимулирующих L-клетки, секретирующие ГПП-1 и PYY. Возможны метеоризм и дискомфорт в первые дни, рекомендуйте питьевой режим.','«Комфортный живот и спокойный аппетит, это его работа»','живот пищеварение вздутие жкт побочка стул микрофлора','Inulin (фруктан β(2→1), пребиотик)']];
+var OB=[
+['Дорого','дорого цена деньги дешевле скидка дорогой бюджет',['Понимаю вас, цена — важный вопрос.','А скажите, а если бы цена была не вопросом, сама программа вам подходит?','Это ~1 700 тг в день, меньше чашки кофе, а в рассрочку Kaspi от 2 167 тг в месяц.','Какой вариант вам удобнее: 1 банка или 3 месяца с подарком?']],
+['Я подумаю','подумаю потом позже вернусь время',['Конечно, решение важное.','Обычно «подумаю» значит, что остался один вопрос. Какой именно: цена, эффективность или безопасность?','Давайте решим его сейчас, чтобы вы думали по делу.','Что нужно, чтобы вы сказали „да“ сегодня?']],
+['Не хочу худеть / Нормальный вес','нормальный вес худеть тонус детокс худая',['Отлично, что вы в форме!','Многим важно не вес, а отёки, энергия, кожа и пищеварение.','Саше Lite & Balance работают как ежедневная поддержка.','Хотели бы, чтобы энергии и лёгкости было больше?']],
+['Не верю в БАДы / не помогло','бады верю пробовала помогло обман мошенники',['Я вас понимаю, на вашем месте я бы тоже сомневалась.','Скажите, что именно вы пробовали и чего не хватило?','Здесь есть сопровождение нутрициолога, и результат зависит от рациона, не только от капсул.','Готовы попробовать со схемой, а не „пить и ждать“?']],
+['Посоветуюсь с мужем / врачом','муж мужем врач посоветуюсь жена семья доктор',['Это правильно, особенно врача, если есть хронические болезни.','Если муж/врач скажет „ок“, вы готовы начинать?','Давайте отправлю состав, чтобы вам было что показать.','Когда вам удобно созвониться, завтра в это время?']],
+['А нет ли побочек?','побочка побочки безопасно аллергия вред живот вздутие противопоказания',['Хороший вопрос.','БАД не лекарство; возможна индивидуальная чувствительность к компонентам (в начале из-за инулина бывает вздутие, пейте воду).','Противопоказания: беременность, ГВ, аллергия на компоненты; при болезнях проконсультируйтесь с врачом.','Есть ли у вас сейчас что-то из перечисленного?']]];
+var PR=[['1 банка',1,52000,4333,2167],['2+1',3,104000,8667,4333],['3+2',5,156000,13000,6500],['4+3',7,208000,17333,8667],['5+5',10,260000,21667,10833],['6+6',12,312000,26000,13000]];
+var BADGE=['Старт','','Хит','','Максимум','Выгода'];
+
+var TRUMP_CARDS = [
+ "💡 У нас более 1000 успешных кейсов клиентов, которые переболели срывами и вернули идеальную форму. Главное — поддержка нутрициолога 24/7.",
+ "🔥 Вы покупаете не БАД, а готовую систему: рацион + контроль аппетита + сопровождение диетолога до победного результата.",
+ "💎 Наш продукт производится по корейским и немецким стандартам сырья в Казахстане — без переплат за импортную логистику.",
+ "⚡ Откладывая покупку на месяц, вы рискуете набрать еще 2-3 кг из-за отёков и вечерних зажоров. Зачем усложнять задачу?",
+ "☕ Стоимость 1 дня курса равна всего 1 чашке кофе. Здоровье и стройность точно стоят дороже повседневных перекусов!"
+];
+
+function getRandomTrump(){
+ var idx = Math.floor(Math.random()*TRUMP_CARDS.length);
+ var t = TRUMP_CARDS[idx];
+ var el = $('toast');
+ el.innerText = "🎲 " + t;
+ el.classList.add('show');
+ setTimeout(function(){el.classList.remove('show');el.innerText="Скопировано в буфер!"}, 4000);
+}
+
+function nz(s){return String(s).toLowerCase().replace(/ё/g,'е').replace(/[^a-zа-я0-9 ]/g,' ')}
+function lev(a,b){var m=a.length,n=b.length,d=[],i,j;for(i=0;i<=m;i++){d[i]=[i]}for(j=1;j<=n;j++)d[0][j]=j;
+ for(i=1;i<=m;i++)for(j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]==b[j-1]?0:1));return d[m][n]}
+function tm(q,t){if(t.indexOf(q)>-1)return 3;var l=q.length;if(l<3)return 0;var tol=l>5?2:l>3?1:0;
+ if(t.length>=l-1&&lev(q,t.slice(0,l))<=tol)return 2;if(lev(q,t)<=tol)return 2;return 0}
+var IDX=[];
+OB.forEach(function(o){IDX.push({tab:3,t:'🛡️ '+o[0],x:o[2].join(' '),tg:o[1]+' '+o[0],cp:o[2].join('\n')})});
+CMP.forEach(function(c){IDX.push({tab:2,t:'🧪 '+c[0],x:c[1]+' '+c[2],tg:c[4],cp:c[0]+': '+c[3]})});
+QS.forEach(function(c){c[1].forEach(function(q){IDX.push({tab:1,t:'📜 '+c[0],x:q,tg:c[0]+(c[0].indexOf('Близость')>-1?' секс интим либидо удовольствие':''),cp:q})})});
+IDX.push({tab:3,t:'⚠️ Проблема со здоровьем / отказ',x:'ветка для клиента, который отказывается, но назвал отклонение в здоровье',tg:'сердце давление операция здоровье отказ суставы сахар диабет отеки храп',cp:''});
+IDX.push({tab:4,t:'💰 Прайс и Kaspi',x:'цена рассрочка kaspi банка подарок стоимость в день',tg:'цена дорого kaspi рассрочка',cp:''});
+function search(v){var q=nz(v).trim().split(/\s+/).filter(Boolean);if(!q.length)return[];
+ return IDX.map(function(it){var toks=nz(it.tg+' '+it.t+' '+it.x).split(/\s+/),sc=0,hit=0;
+  q.forEach(function(w){var b=0;toks.forEach(function(t){if(t){var s=tm(w,t);if(s>b)b=s}});if(b){hit++;sc+=b}});
+  return{it:it,s:hit==q.length?sc:0}}).filter(function(r){return r.s>0}).sort(function(a,b){return b.s-a.s}).slice(0,12)}
+$('q').addEventListener('input',function(){var v=this.value,r=$('res');
+ if(!v.trim()){r.style.display='none';$('panes').style.display='';renderAll();return}
+ var rs=search(v);renderAll();
+ r.style.display='';$('panes').style.display='none';
+ r.innerHTML='<h2>Результаты</h2>'+(rs.length?rs.map(function(o){var it=o.it;return '<div class="card"><h3>'+it.t+'</h3><div>'+it.x+'</div>'+(it.cp?cb(it.cp):'')+'<br><button class="cp" onclick="go('+it.tab+')">Открыть вкладку</button></div>'}).join(''):'<div class="card mu">Ничего не найдено. Попробуйте 🆘 Нет ответа?.</div>')});
+function go(t){S.tab=t;$('q').value='';$('res').style.display='none';$('panes').style.display='';renderAll();scrollTo(0,0)}
+
+var RK=[
+['❤️ Давление / сердце','давлением и сердцем','Лишний вес и висцеральный жир, то есть жир вокруг органов, заставляют сердце работать с перегрузкой.','Со временем это повышает давление, а повышенное давление увеличивает риск болезней сердца и сосудов.','В тяжёлых случаях всё доходит до стационара и серьёзных вмешательств. Этого можно избежать, если заняться вопросом вовремя.'],
+['🦵 Суставы / спина','суставами и спиной','Каждый лишний килограмм заметно добавляет нагрузку на колени и позвоночник.','Хрящ изнашивается быстрее, появляются боли и ограничения в движении.','У многих это заканчивается ограничением активности, а в тяжёлых случаях операциями на суставах.'],
+['🩸 Сахар / диабет','сахаром','Висцеральный жир снижает чувствительность клеток к инсулину.','Это повышает риск преддиабета и диабета 2 типа.','А диабет затрагивает сосуды, зрение, почки, и жить с ним гораздо сложнее, чем сейчас убрать лишние килограммы.'],
+['💧 Отёки / одышка','отёками и одышкой','Отёки и одышка часто говорят, что сердцу и сосудам тяжело.','Если ничего не менять, нагрузка только растёт, а лёгкость уходит.','Лучше разобраться, пока это ещё просто лишний вес, а не диагноз.'],
+['😴 Храп / сон','храпом и сном','Лишний вес сужает дыхательные пути, отсюда храп.','Ночью мозг и сердце недополучают кислород: утром разбитость, давление растёт.','Это называют апноэ сна, и это отдельный фактор риска для сердца.'],
+['🦋 Щитовидка / гормоны','гормонами и щитовидкой','Гормоны и вес подпитывают друг друга: вес растёт — гормональный фон сбивается, и наоборот.','Растут усталость, отёки, страдает цикл и настроение.','Важно разорвать этот круг, пока всё не стало серьёзнее.'],
+['🌿 ЖКТ / печень','пищеварением и печенью','Жир откладывается и в печении (жировой гепатоз), а пищеварение замедляется.','Тяжесть, вздутие, изжога, а затем нагрузка на желчный и поджелудочную.','Чем раньше начать, тем проще вернуть всё в норму.'],
+['🌸 Цикл / планы на ребёнка','циклом и женским здоровьем','Лишний вес влияет на гормоны и цикл.','Это может осложнять зачатие и беременность.','Когда вес под контролем, женское здоровье стабильнее. Это можно сделать до того, как возникнут сложности.']];
+function riskHTML(){var d=bmiData(),k=S.risk,h='<div class="card"><h3>⚠️ Назвал проблему со здоровьем</h3><div class="mu">Выберите, что назвал клиент. Ниже: зацепка → цепочка → цена бездействия → решение.</div><div class="chips" style="flex-wrap:wrap;margin-top:8px">'+RK.map(function(r,i){return '<button class="'+(k===i?'on':'')+'" onclick="S.risk='+i+';save();renderAll()">'+r[0]+'</button>'}).join('')+'</div></div>';
+ if(k==null||!RK[k])return h;var r=RK[k],x=[];
+ x.push('Вы сами сказали, что есть вопросы с '+r[1]+'. Это не мелочь, а сигнал организма. Хорошо, что он пока подаёт его мягко: сейчас всё ещё можно исправить без тяжёлых последствий.');
+ if(d&&d.d>2)x.push('У вас сейчас примерно +'+Math.round(d.d)+' кг к ориентиру, и именно эти килограммы дают нагрузку.');
+ x.push(r[2],r[3],r[4]);
+ x.push('Я не врач, и наша программа не заменяет обследование и лечение. Но вес — тот фактор, на который вы можете повлиять уже сегодня, и от него зависит многое.');
+ x.push('Если ничего не менять, обычно сначала дискомфорт, потом таблетки, потом обследования, а дальше всё дороже и сложнее. Заняться этим сейчас намного проще и дешевле.');
+ x.push('Поэтому у нас программа: контроль аппетита, поддержка обмена веществ и нутрициолог 24/7, который ведёт вас по шагам. Вы не останетесь с этим одна.');
+ x.push('Что для вас важнее: ещё откладывать или начать сегодня, пока это просто лишний вес? Давайте подберу курс под вашу цель.');
+ return h+'<div class="card">'+x.map(function(t){return '<div style="margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid var(--bd)" class="rk">'+t+cb(t)+'</div>'}).join('')+'</div>'}
+
+function fm(n){return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+function bmiData(){var h=+S.h,w=+S.w;if(!h||!w)return null;var b=w/Math.pow(h/100,2),id=S.g=='m'?h-100-(h-150)/4:h-100-(h-150)/2.5;
+ var st=b<18.5?['Дефицит массы','n']:b<25?['Норма','n']:b<30?['Избыток массы','o']:b<35?['Ожирение I ст.','o']:b<40?['Ожирение II ст.','o']:['Ожирение III ст.','o'];
+ return{b:b,st:st[0],k:st[1],id:id,d:w-id}}
+function rec(){var d=bmiData();if(!d||d.b<18.5)return null;var T=+S.t||Math.max(Math.round(d.d),0),norm=!+S.t&&T<=2,need=norm?3:Math.max(1,Math.ceil(T/6));
+ function pick(m){for(var i=0;i<PR.length;i++)if(PR[i][1]>=m)return i;return PR.length-1}
+ var bs=pick(need),id=pick(need+2),mx=Math.min(PR.length-1,id+1);return{T:T,norm:norm,need:need,bs:bs,id:id,mx:mx}}
+function pitch(r,k){var p=PR[k],day=p[2]/(p[1]*30);
+ return (r.norm?'Для детокса, тонуса и энергии оптимально курс на '+p[1]+' мес.':'Исходя из ваших '+r.T+' кг и запаса на закрепление результата оптимально курс на '+p[1]+' мес.')+': '+p[1]+' '+pl(p[1])+' капсул и '+p[1]+' упаковок саше в подарок за '+fm(p[2])+' ₸. Это около '+fm(day)+' ₸ в день, а по Kaspi 12 — '+fm(p[3])+' ₸ в месяц.'}
+function recHTML(d){var r=rec();if(!r)return d&&d.b<18.5?'<div class="card mu">При дефиците массы курс для похудения не предлагаем: мягко переведите разговор на питание и консультацию врача.</div>':'';
+ var L={},lab=['Базовый','Идеальный (с запасом)','Максимум'];L[r.mx]=lab[2];L[r.bs]=lab[0];L[r.id]=lab[1];
+ var h='<div class="card"><h3>🎯 Подбор курса</h3><div class="mu">'+(r.norm?'Цель: детокс, тонус, энергия.':'Цель: минус '+r.T+' кг ≈ '+r.need+' мес. (ориентир компании: 4–8 кг в 1-й месяц, 8–16 кг за 2 месяца). Остальное время — закрепление.')+' Результат индивидуален и зависит от питания и режима.</div></div>';
+ Object.keys(L).map(Number).sort(function(a,b){return a-b}).forEach(function(k){var p=PR[k],t=pitch(r,k);
+  h+='<div class="card"'+(k==r.id?' style="border-color:var(--em)"':'')+'><div style="display:flex;justify-content:space-between"><b>'+p[0]+' · '+p[1]+' мес.</b><span class="tag">'+L[k]+'</span></div><div class="big" style="font-size:24px">'+fm(p[2])+' ₸</div><div class="mu">Капсул '+p[1]+' + саше '+p[1]+' в подарок · Kaspi 12: '+fm(p[3])+' ₸/мес · '+fm(p[2]/(p[1]*30))+' ₸/день</div><div style="margin-top:6px">'+t+'</div>'+cb(t)+'<button class="btn-wa" onclick="sendWA(\''+t.replace(/'/g,"\\'")+'\')">📱 Отправить в WA</button></div>'});
+ return h}
+
+function delayCalcHTML(){
+ var m = S.delayMonths || 2;
+ var addKg = m * 1.5;
+ var addCost = m * 25000;
+ var txt = "Если отложить начало на "+m+" мес: вы рискуете набрать еще ~"+addKg+" кг (из-за отеков и срывов) и потратите на лишние перекусы порядка "+fm(addCost)+" ₸. Начните сейчас, чтобы не переплачивать организму!";
+ return '<div class="card warn"><h3>⏳ Цена бездействия (Отсрочка)</h3><div class="row" style="margin-bottom:8px"><div><label>Отложить на (мес):</label><input type="number" value="'+m+'" oninput="S.delayMonths=+this.value;save();renderAll()"></div></div><div>'+txt+'</div>'+cb(txt)+'</div>';
+}
+
+function p0(){return '<h2>⚖️ Анализ веса</h2><div class="card"><div class="row"><div><label>Рост, см</label><input id="h" type="number" inputmode="numeric" value="'+S.h+'"></div><div><label>Вес, кг</label><input id="w" type="number" inputmode="decimal" value="'+S.w+'"></div></div><div class="row" style="margin-top:8px"><div><label>Возраст</label><input id="a" type="number" inputmode="numeric" value="'+S.a+'"></div><div><label>Пол</label><select id="g"><option value="f"'+(S.g=='f'?' selected':'')+'>Женский</option><option value="m"'+(S.g=='m'?' selected':'')+'>Мужской</option></select></div></div><div style="margin-top:8px"><label>Цель клиента, кг (если назвал, иначе считаю по ориентиру)</label><input id="t" type="number" inputmode="decimal" value="'+(S.t||'')+'"></div></div><div id="bo">'+bo(bmiData())+'</div>'}
+function bo(d){if(!d)return '<div class="card mu">Введите рост и вес, расчёт появится сразу.</div>';
+ var o=d.k=='o',x=d.d,f=S.g=='f',head='<div class="card"><div class="mu">ИМТ</div><div class="big">'+d.b.toFixed(1)+'</div><span class="tag">'+d.st+'</span><p>Ориентир (формула Лоренца): <b>'+d.id.toFixed(0)+' кг</b>. Разница: <b style="color:'+(x>0?'var(--wr)':'var(--em)')+'">'+(x>0?'+':'')+x.toFixed(1)+' кг</b></p><div class="mu">Ориентир, не диагноз.</div></div>';
+ if(d.b<18.5)return head+recHTML(d);
+ var G=o?[['🫀 Здоровье',['Висцеральный жир (вокруг органов) повышает нагрузку на сердце и сосуды.','Каждый лишний килограмм ощутимо добавляет нагрузку на суставы, особенно на колени и спину.','Лишний вес нередко связан с храпом и плохим сном, а недосып усиливает аппетит и тягу к сладкому.']],['⚡ Самочувствие',['Отёчность, одышка на лестнице и усталость к вечеру часто идут вместе с лишним весом.','Стресс, сон и вес связаны: когда нервов много, организм копит, а не тратит.']],['💞 Уверенность и близость',['Лишний вес часто отражается на самооценке, стеснении и желании близости.',f?'Когда возвращается лёгкость, возвращается и ощущение себя женственной и желанной.':'Когда возвращается лёгкость, возвращаются энергия и уверенность рядом с партнёршей.']],['🌉 Мостик к SAF',['«{имя}, SAF помогает контролировать аппетит и поддерживать жировой обмен, а нутрициолог ведёт вас по шагам, вы не останетесь с этим одни».','«Если ничего не менять, через год вы окажетесь в той же точке или хуже. Давайте изменим это сейчас».']]]
+ :[['🌫 Скрытый жир',['Вес в норме, а тонуса нет: это «скрытый жир» (skinny fat): мало мышц и мягкая фигура.','Отёки, вялая кожа и усталость часто остаются, даже когда на весах всё хорошо.']],['⚡ Энергия и стресс',['Постоянный стресс, недосып и кофе истощают организм, а энергии всё меньше.','Нагрузка на печень и пищеварение даёт тяжесть, вздутие и тусклую кожу.']],['💞 Уверенность и близость',['Усталость и напряжение снижают желание и удовольствие от близости.','Когда энергии больше, настроение и уверенность в себе возвращаются.']],['🌉 Мостик к SAF',['«{имя}, SAF — это детокс, тонус и энергия: саше с глутатионом и витамином C плюс спокойный контроль аппетита».']]];
+ return head+G.map(function(g){return '<div class="card"><h3>'+g[0]+'</h3>'+g[1].map(ph).join('')+'</div>'}).join('')+recHTML(d)+delayCalcHTML()+'<button class="btn" style="background:#2a2a2a;color:#fff;margin-bottom:8px" onclick="S.scen=\'C\';S.stage=2;S.tab=1;save();renderAll();scrollTo(0,0)">⚠️ Ветка „клиент назвал проблему со здоровьем“</button><button class="btn" onclick="toScript()">📜 Перенести данные в Скрипт</button>'}
+function toScript(){S.stage=0;S.tab=1;save();renderAll();scrollTo(0,0)}
+function bindCalc(){['h','w','a','t'].forEach(function(i){var e=$(i);if(e)e.oninput=function(){S[i]=this.value;save();C=[];$('bo').innerHTML=bo(bmiData())}});
+ var g=$('g');if(g)g.onchange=function(){S.g=this.value;save();C=[];$('bo').innerHTML=bo(bmiData())}}
+
+var LN=0;function cl(id,t){LN++;return '<div class="card ln" onclick="objSheet('+S.stage+')"><span class="n">'+LN+'</span><span class="t" style="flex:1">'+t+'</span><span class="bolt">⚡</span>'+cb(t)+'</div>'}
+function fill(t){var d=bmiData(),r=rec();return t.replace(/\{X\}/g,r&&!r.norm?r.T:'Х')}
+function giftBlock(r){var j=S.jars||(r?PR[r.id][1]:5),t='Сегодня у нас действует акция: к каждой банке капсул идёт упаковка саше Lite & Balance в подарок. У вас курс из '+j+' '+pl(j)+', значит '+j+' упаковок саше вы получаете в подарок.';
+ return '<div class="card"><h3>🎁 Подарочные саше</h3><div class="chips">'+PR.map(function(p){return '<button class="'+(p[1]==j?'on':'')+'" onclick="S.jars='+p[1]+';save();renderAll()">'+p[1]+' бан.</button>'}).join('')+'</div>'+cl('gift'+j,t)+'</div>'}
+function recPitch(r){if(!r)return '<div class="card mu">Введите рост и вес во вкладке «Вес», здесь появятся готовые предложения по курсу.</div>';
+ var ks=[r.bs,r.id,r.mx].filter(function(v,i,a){return a.indexOf(v)==i});return '<div class="card"><h3>💰 Предложение курса</h3>'+ks.map(function(k){return cl('rec'+k,pitch(r,k))}).join('')+'</div>'}
+function closes(r){var k=r?r.id:2,p=PR[k];return [
+ '«{имя}, исходя из вашей цели оптимально курс на '+p[1]+' мес.: '+p[1]+' '+pl(p[1])+' и '+p[1]+' саше в подарок, '+fm(p[2])+' ₸. Оформляем сегодня?»',
+ '«Вам удобнее оплатить сразу или в рассрочку Kaspi на 12 месяцев — '+fm(p[3])+' ₸ в месяц, или на 24 — '+fm(p[4])+' ₸?»',
+ '«Сегодня к курсу идут подарочные саше и нутрициолог 24/7. Что нужно, чтобы вы начали уже сегодня? Давайте решим это сейчас».']}
+function p1(){LN=0;var d=bmiData(),r=rec(),x='<h2>📜 Скрипт</h2>';
+ 
+ x+='<div class="card"><b>🔥 Настрой / Температура клиента:</b><div class="seg" style="margin-top:6px"><button class="'+(S.temp=='cold'?'on':'')+'" onclick="S.temp=\'cold\';save();renderAll()">❄️ Холодный</button><button class="'+(S.temp=='warm'?'on':'')+'" onclick="S.temp=\'warm\';save();renderAll()">🌤️ Тёплый</button><button class="'+(S.temp=='hot'?'on':'')+'" onclick="S.temp=\'hot\';save();renderAll()">🔥 Горячий</button></div></div>';
+ 
+ if(d)x+='<div class="card"><b>Клиент:</b> '+S.h+' см, '+S.w+' кг'+(S.a?', '+S.a+' лет':'')+' · ИМТ '+d.b.toFixed(1)+' ('+d.st+')'+(r&&!r.norm?' · цель −'+r.T+' кг':'')+'</div>';
+ x+='<div class="chips">'+ST.map(function(s,i){return '<button class="'+(S.stage==i?'on':'')+'" onclick="S.stage='+i+';save();renderAll();scrollTo(0,0)">'+(i+1)+'. '+s[0]+'</button>'}).join('')+'</div>';
+ var i=S.stage,s=ST[i];
+ if(i==1)x+=QS.map(function(c,ci){return '<div class="card"><h3>'+c[0]+'</h3>'+c[1].map(function(q,qi){return cl('q'+ci+'_'+qi,q)}).join('')+'</div>'}).join('');
+ else if(i==2)x+='<div class="seg"><button class="'+(S.scen=='A'?'on':'')+'" onclick="S.scen=\'A\';save();renderAll()">🎯 A: Похудение</button><button class="'+(S.scen=='B'?'on':'')+'" onclick="S.scen=\'B\';save();renderAll()">🌿 B: Норма</button><button class="'+(S.scen=='C'?'on':'')+'" onclick="S.scen=\'C\';save();renderAll()">⚠️ C: Здоровье</button></div>'+(S.scen=='C'?riskHTML():SC[S.scen].map(function(t,k){return cl('s'+S.scen+k,fill(t))}).join('')+'<div class="card"><h3>🗺 Что ждать по месяцам</h3>'+ROAD.map(function(t,k){return cl('rd'+k,t)}).join('')+'</div>');
+ else if(i==4)x+=closes(r).map(function(t,k){return cl('cl'+k,fill(t))}).join('');
+ else x+=s[1].map(function(l,k){var t=l[0];if(t=='GIFT')return giftBlock(r);if(t=='REC')return recPitch(r);return cl('t'+i+'_'+k,fill(t))}).join('');
+ 
+ x+='<div style="margin-top:10px"><button class="btn" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff" onclick="getRandomTrump()">🎲 Выбить случайный козырь / кейс</button></div>';
+
+ x+='<div class="stk"><button class="btn" style="background:#2a2a2a;color:#fff" onclick="S.stage=Math.max(0,S.stage-1);save();renderAll();scrollTo(0,0)">← Назад</button><button class="btn" onclick="S.stage=Math.min(4,S.stage+1);save();renderAll();scrollTo(0,0)">Далее →</button></div>';
+ return x}
+
+function p2(){var x='<h2>🧪 Состав SAF</h2><div class="seg"><button class="'+(S.mode=='s'?'on':'')+'" onclick="S.mode=\'s\';save();renderAll()">🙋 Простым языком</button><button class="'+(S.mode=='e'?'on':'')+'" onclick="S.mode=\'e\';save();renderAll()">🔬 Научный</button></div>';
+ x+='<h3>Капсулы «Контроль аппетита»</h3>'+CMP.slice(0,5).map(cc).join('')+'<h3>Саше «Lite &amp; Balance»</h3>'+CMP.slice(5).map(cc).join('');
+ var sy=S.mode=='s'?'Капсулы — «тормоз» для аппетита, тяги к сладкому и стресса. Саше — «двигатель и фильтр»: энергия, обмен, чистка и кишечник. Вместе они закрывают всё сразу, поэтому курс — комплекс.':'Взаимодействие: контур аппетита — Corglutid GLP-1 + инулин (ГПП-1/PYY через SCFA) + белая фасоль + джимнема; контур стресса — шафран + L-теанин (+ сон и кортизол); контур энергии — таурин + L-тирозин + афрамомум + CLA; контур защиты — глутатион + витамин C. БАД не является лекарственным средством.';
+ return x+'<div class="card"><h3>🔗 Как работает вместе</h3>'+sy+cb(sy)+'<br><button class="btn-wa" onclick="sendWA(\'Полный состав SAF:\\n'+sy.replace(/'/g,"\\'")+'\')">📱 Отправить полный состав в WA</button></div>'}
+function cc(c){var e=S.mode=='e',t=e?c[2]:c[1];var msg = (e?c[5]:c[0])+': '+t+'\nМостик: '+fill(c[3]);
+ return '<div class="card"><b>'+(e?c[5]:c[0])+'</b><div style="margin-top:4px">'+t+'</div><div style="margin-top:6px;color:var(--em)">🌉 '+fill(c[3])+'</div>'+cb(msg)+'<button class="btn-wa" onclick="sendWA(\''+msg.replace(/'/g,"\\'")+'\')">📱 WA</button></div>'}
+
+function p3(){return '<h2>🛡️ Возражения</h2>'+riskHTML()+'<div class="mu" style="margin-bottom:8px">Схема: Смягчение → Перехват → Аргумент → Закрывающий вопрос. Поиск вверху понимает опечатки.</div>'+OB.map(function(o){var n=['Смягчение','Перехват','Аргумент','Вопрос-закрытие'],full=o[2].join('\n');
+ return '<div class="card"><h3>'+o[0]+'</h3>'+o[2].map(function(t,i){return '<div style="margin:6px 0"><span class="mu">'+n[i]+'</span><br>'+t+'</div>'}).join('')+cb(full)+'<button class="btn-wa" onclick="sendWA(\'Ответ по поводу '+o[0]+':\\n'+full.replace(/'/g,"\\'")+'\')">📱 Отправить ответ в WA</button></div>'}).join('')}
+
+function p4(){var f=function(n){return Math.round(n).toLocaleString('ru-RU').replace(/\u00a0/g,' ')},cf=+S.cof||1500;
+ return '<h2>💰 Прайс и Kaspi</h2><div class="card"><label>Цена чашки кофе, тг</label><input type="number" inputmode="numeric" value="'+S.cof+'" oninput="S.cof=this.value;save();rp()"></div><div id="pg">'+pg(f,cf)+'</div>'}
+function pg(f,cf){return PR.map(function(p,i){var day=p[2]/(p[1]*30),t='Тариф '+p[0]+' ('+p[1]+' мес): капсул '+p[1]+' + саше '+p[1]+' в подарок, '+f(p[2])+' тг. Kaspi 12: '+f(p[3])+'/мес; Kaspi 24: '+f(p[4])+'/мес. Это '+f(day)+' тг в день.';
+ return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:17px">'+p[0]+' · '+p[1]+' мес</b>'+(BADGE[i]?'<span class="tag">'+BADGE[i]+'</span>':'')+'</div><div class="mu">Капсул '+p[1]+' + саше '+p[1]+' в подарок</div><div class="big" style="font-size:26px">'+f(p[2])+' ₸</div><table><tr><td class="mu">Kaspi 12</td><td align="right"><b>'+f(p[3])+' ₸/мес</b></td></tr><tr><td class="mu">Kaspi 24</td><td align="right"><b>'+f(p[4])+' ₸/мес</b></td></tr><tr><td class="mu">В день</td><td align="right"><b>'+f(day)+' ₸</b> ('+Math.round(day/cf*100)+'% от кофе)</td></tr></table>'+cb(t)+'<button class="btn-wa" onclick="sendWA(\''+t.replace(/'/g,"\\'")+'\')">📱 Отправить тариф в WA</button></div>'}).join('')}
+function rp(){var f=function(n){return Math.round(n).toLocaleString('ru-RU')};C=[];$('pg').innerHTML=pg(f,+S.cof||1500)}
+
+var NOB=[
+['Мне сейчас некогда',['Понимаю вас, у всех время дорого.','Это займёт всего 10 минут, а потом вы будете знать, подойдёт ли вам программа.','Лучше сейчас получить ответ, чем снова искать и сравнивать.','Давайте начнём, а если станет неудобно, остановимся. Хорошо?']],
+['Откуда у вас мой номер / я не оставляла заявку',['Понимаю вопрос, это важно.','Номер оставляли на сайте при заявке на консультацию по контролю веса.','Если это не вы или вам неинтересно, я не буду вас беспокоить.','Но если вопрос веса вам всё же знаком, давайте уделим 5 минут?']],
+['Мне неинтересно / не нужно',['Спасибо, что честно говорите.','Многие так отвечают, пока не узнают, что именно мы предлагаем.','Консультация бесплатная и ни к чему не обязывает.','Скажите, а лишний вес или усталость вас сейчас вообще беспокоят?']],
+['Это реклама? Не звоните',['Понимаю, реклама надоедает.','Я звоню по вашей заявке, а не просто так.','Задам пару вопросов, и вы решите сами, нужно ли вам это.','Можно две минуты, чтобы вы убедились?']],
+['Зачем вам мой вес и возраст?',['Хороший вопрос.','Это нужно, чтобы подобрать курс именно под вас, а не «для всех».','Чем точнее данные, тем точнее срок и результат.','Подскажите, пожалуйста, рост и вес?']],
+['Не хочу отвечать на личные вопросы',['Понимаю, это ваше право.','Эти вопросы нужны лишь для того, чтобы понять гормональный фон и стресс, всё остаётся между нами.','Можно пропустить любой из них.','Давайте тогда вернёмся к питанию и сну. Как у вас с ними?']],
+['Просто скажите цену',['Понимаю, цена важна.','Цена зависит от срока и цели, поэтому мне нужна минута, чтобы подобрать правильный вариант.','Иначе вы переплатите или возьмёте не то.','Скажите, сколько кг хотите убрать?']],
+['Я всё пробовала, ничего не работает',['Понимаю, это обидно.','Именно поэтому я спрашиваю, что и почему не сработало: чаще всего не хватает контроля аппетита и сопровождения.','У нас есть и то, и другое.','Что именно вы пробовали и на чём срывались?']],
+['Вы меня пугаете',['Я не хочу пугать, мне важно, чтобы вы были в курсе.','Это не диагноз, а риск: чем раньше заняться, тем проще.','Сейчас у вас есть выбор и время.','Давайте решим вопрос спокойно: какой результат был бы для вас идеальным?']],
+['Это не проблема, я здорова',['Отлично, что вы так себя чувствуете.','Часто проблемы накапливаются тихо, и их замечаешь, когда уже сложнее.','Профилактика всегда дешевле и приятнее, чем лечение.','Хотели бы вы больше энергии и лёгкости в теле?']]];
+NOB=NOB.map(function(o){return[o[0],'',o[1]]});NOB.forEach(function(o){IDX.push({tab:3,t:'🛡️ '+o[0],x:o[2].join(' '),tg:o[0],cp:o[2].join('\n')})});
+function objSheet(st){var L={0:[0,1,2,3].map(function(i){return NOB[i]}),1:[4,5,6,7].map(function(i){return NOB[i]}),2:[OB[2],NOB[8],NOB[9]],3:[OB[0],OB[3],OB[5],OB[4]],4:[OB[0],OB[1],OB[4],OB[5],OB[3]]}[st]||OB,n=['Смягчение','Перехват','Аргумент','Вопрос-закрытие'];
+ $('sheet').innerHTML='<div style="display:flex;justify-content:space-between"><h2>⚡ Возражение на этом шаге</h2><button class="cp" onclick="$(\'ov\').classList.remove(\'show\')">✕</button></div><div class="mu" style="margin-bottom:8px">Выберите, что сказал клиент. Удерживайте фразу — копировать.</div>'+L.map(function(o){var st2=o[2];
+  return '<div class="card"><b onclick="var e=this.nextSibling;e.style.display=e.style.display==\'none\'?\'block\':\'none\'" style="display:block;cursor:pointer">🛡️ '+o[0]+' ▾</b><div style="display:'+(L.length==1?'block':'none')+';margin-top:8px">'+st2.map(function(t,k){return '<div class="rk" style="margin:0 0 8px;padding-bottom:8px;border-bottom:1px solid var(--bd)"><span class="mu">'+n[k]+'</span><br>'+fill(t)+cb(fill(t))+'</div>'}).join('')+'</div></div>'}).join('')+'<button class="btn" style="background:#2a2a2a;color:#fff" onclick="wolf()">🆘 Нет в списке</button>';
+ $('ov').classList.add('show')}
+
+function wolf(){var n=['Шаг 1. Смягчение','Шаг 2. Изоляция','Шаг 3. Перепродажа 3 столпов'];
+ var ws=[['Я вас отлично понимаю, на вашем месте я бы тоже так подумала.'],['А если отбросить этот момент, сама идея сбросить {X} кг / почувствовать себя лучше вам нравится?'],['Продукт: комплекс из капсул и саше, который работает на аппетит, обмен и пищеварение.\nЭксперт: я веду вас до результата, а нутрициолог на связи.\nКомпания: SAF работает открыто, с понятным составом и поддержкой.']];
+ $('sheet').innerHTML='<div style="display:flex;justify-content:space-between"><h2>🆘 Нет ответа?</h2><button class="cp" onclick="$(\'ov\').classList.remove(\'show\')">✕</button></div><div class="mu">Универсальная схема для любого возражения: вернитесь к цели клиента.</div>'+[0,1,2].map(function(i){var t=fill(ws[i][0]);return '<div class="card"><h3>'+n[i]+'</h3>'+t.replace(/\n/g,'<br>')+cb(t)+'</div>'}).join('')+'<div class="card mu">После шага 3 вернитесь к закрытию: «Так что, оформляем?»</div>';
+ $('ov').classList.add('show')}
+$('wolf').onclick=function(){wolf()};
+$('ov').onclick=function(e){if(e.target===this)this.classList.remove('show')};
+
+var TB=[['⚖️','Вес'],['📜','Скрипт'],['🧪','Состав'],['🛡️','Возраж.'],['💰','Прайс']];
+$('nav').innerHTML=TB.map(function(t,i){return '<button onclick="go('+i+')" id="n'+i+'"><span>'+t[0]+'</span>'+t[1]+'</button>'}).join('');
+function renderAll(){var fn=[p0,p1,p2,p3,p4];C=[];save();document.body.className='t'+S.tab;
+ fn.forEach(function(f,i){var p=$('p'+i);p.classList.toggle('on',S.tab==i);$('n'+i).classList.toggle('on',S.tab==i);if(S.tab==i)p.innerHTML=f()});bindCalc()}
+renderAll();
+</script></body></html>
